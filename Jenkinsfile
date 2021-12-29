@@ -1,5 +1,8 @@
 pipeline {
-	agent any  
+	agent any
+	tools {
+		jdk 'jdk11'
+	}
 
 	stages {
 		stage("build") {
@@ -11,6 +14,13 @@ pipeline {
 		stage("test") {
 			steps {
 				echo "testing..."
+			}
+		}
+		stage("version") {
+			steps {
+				sh '''
+				java -version
+				'''
 			}
 		}
 	}
