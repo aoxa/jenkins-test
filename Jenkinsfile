@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	tools {
-		jdk 'jdk11'
+		jdk 'jdk8'
 		gradle 'gradle4'
 	}
 
@@ -9,18 +9,27 @@ pipeline {
 		stage("build") {
 			steps {
 				echo "building..."
+				sh '''
+					gradle build
+				'''
 			}
 		}
 
 		stage("test") {
 			steps {
 				echo "testing..."
+				sh '''
+				gradle test
+				'''
 			}
 		}
 		stage("version") {
 			steps {
 				sh '''
-				java -version
+				java -version				
+				'''
+				sh '''
+				gradle -version
 				'''
 			}
 		}
