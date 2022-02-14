@@ -9,18 +9,27 @@ pipeline {
 		stage("build") {
 			steps {
 				echo "building..."
+				sh '''
+					gradle build
+				'''
 			}
 		}
 
 		stage("test") {
 			steps {
 				echo "testing..."
+				sh '''
+				gradle test
+				'''
 			}
 		}
 		stage("version") {
 			steps {
 				sh '''
-				java -version
+				java -version				
+				'''
+				sh '''
+				gradle -version
 				'''
 			}
 		}
